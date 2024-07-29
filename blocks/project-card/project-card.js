@@ -6,29 +6,23 @@ import {
   observeElementWithCallback,
 } from '../../scripts/helpers.js';
 
-console.log('test')
-
 function createProjectLinkWrapper(infoDiv) {
-    const projectLink = infoDiv.querySelector('a');
-    if (!projectLink) {
-      console.warn('Content Input Alert in Project Card: Need project link');
-    }
   
     const projectLinkWrapper = createTag(
       'a',
       {
         class: 'project-card-link-wrapper',
-        href: projectLink.href,
-        title: projectLink.title,
-        target: returnLinkTarget(projectLink.href),
+        href: '',
+        title: '',
+        target: null,
       },
       '',
     );
     return projectLinkWrapper;
-  }
+}
   
-  // accept .mp4
-  function createVideoElement(videoUrl) {
+// accept .mp4
+function createVideoElement(videoUrl) {
     const attrs = 'playsinline autoplay loop muted';
     const videoHTML = /* html */`
       <video ${attrs}>
@@ -40,9 +34,9 @@ function createProjectLinkWrapper(infoDiv) {
     }, videoHTML);
   
     return videoWrapper;
-  }
+}
   
-  function createMediaDiv(div, block) {
+function createMediaDiv(div, block) {
     const picture = div.querySelector('picture');
   
     const mediaDiv = createTag('div', { class: 'project-card-media' }, '');
@@ -60,9 +54,9 @@ function createProjectLinkWrapper(infoDiv) {
     }
   
     return mediaDiv;
-  }
+}
   
-  function createTitleWrapper(div) {
+function createTitleWrapper(div) {
     const titleWrapper = createTag(
       'div',
       { class: 'project-card-title-wrapper' },
@@ -82,9 +76,9 @@ function createProjectLinkWrapper(infoDiv) {
     }
     titleWrapper.append(newTitle, description);
     return titleWrapper;
-  }
+}
   
-  function createDescriptionWrapper(div) {
+function createDescriptionWrapper(div) {
     const descWrapper = createTag(
       'div',
       { class: 'project-card-description-wrapper' },
@@ -92,20 +86,21 @@ function createProjectLinkWrapper(infoDiv) {
     );
     const title = div.querySelector('h5');
     const description = div.querySelector('p');
-    description.classList.add('description-s');
+    // description.classList.add('description-s');
     descWrapper.append(title, description);
     return descWrapper;
-  }
+}
   
-  function createInfoDiv(briefInfoDiv, detailInfoDiv) {
+function createInfoDiv(briefInfoDiv, detailInfoDiv) {
     const infoDiv = createTag('div', { class: 'project-card-info-wrapper' }, '');
     const titleWrapper = createTitleWrapper(briefInfoDiv);
     const descriptionWrapper = createDescriptionWrapper(detailInfoDiv);
     infoDiv.append(titleWrapper, descriptionWrapper);
     return infoDiv;
-  }
+}
   
-  export default function decorate(block) {
+export default function decorate(block) {
+
     const blockRows = block.querySelectorAll(':scope > div');
     const blockRowArray = [...blockRows];
     if (blockRows.length < 2) {
@@ -126,11 +121,6 @@ function createProjectLinkWrapper(infoDiv) {
     if (infoDiv) projectLinkWrapper.append(infoDiv);
   
     replaceAllChildElements(block, projectLinkWrapper);
-  
-    // add animation
-    const mainTitle = block.querySelector('.project-card-title');
-    if (mainTitle) {
-      addTextSplitAnimationToElement(mainTitle, true, projectLinkWrapper);
-    }
-  }
+
+}
   
