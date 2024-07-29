@@ -4,6 +4,7 @@ header .nav-wrapper {
   width: 100%;
   z-index: 2;
   position: fixed;
+  padding: 9.5rem 0px 1.5rem;
 }
 
 header nav {
@@ -155,7 +156,6 @@ header nav .nav-brand img {
 /* sections */
 header nav .nav-sections {
   grid-area: sections;
-  flex: 1 1 auto;
   display: none;
   visibility: hidden;
   background-color: var(--overlay-color);
@@ -227,7 +227,7 @@ header nav .nav-sections ul > li > ul > li {
     display: flex;
     gap: 2em;
     margin: 0;
-    font-size: var(--body-font-size-xs);
+    font-size: var(--body-font-size-m);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
