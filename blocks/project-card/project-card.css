@@ -99,14 +99,15 @@
   
 .project-card-title-wrapper h4 {
     line-height: 0.9;
-    font-size: clamp(24px, 5.4vw, 36px);
+    font-size: 2.4rem;
     letter-spacing: -0.04em;
     position: relative;
     width: fit-content;
+    font-weight: 100;
 }
   
 .project-card-title-wrapper p {
-    font-weight: 700;
+    font-size: 1.2rem;
     margin: 8px 0;
 }
   
@@ -175,6 +176,74 @@
     color: #000;
 }
 
-.project-card-container .project-card-wrapper .offset-300 {
-    transform: translateY(-300px);
+.project-card-container .project-card-wrapper:nth-child(3) {
+    transform: translateY(-200px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(4) {
+    transform: translateY(-400px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(5) {
+    transform: translateY(-200px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(6) {
+    transform: translateY(-200px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(7) {
+    transform: translateY(-400px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(8) {
+    transform: translateY(-600px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(9) {
+    transform: translateY(-800px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(10) {
+    transform: translateY(-700px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(11) {
+    transform: translateY(-700px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(12) {
+    transform: translateY(-850px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(13) {
+    transform: translateY(-1000px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(14) {
+    transform: translateY(-1150px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(15) {
+    transform: translateY(-1000px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(16) {
+    transform: translateY(-1100px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(17) {
+    transform: translateY(-1250px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(18) {
+    transform: translateY(-1400px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(19) {
+    transform: translateY(-1550px);
+}
+
+.project-card-container .project-card-wrapper:nth-child(20) {
+    transform: translateY(-1700px);
 }
