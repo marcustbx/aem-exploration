@@ -3,5 +3,5 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 Fix #<gh-issue-id>
 
 Test URLs:
-- Before: https://main--franklin-learning--marcustbx.hlx.live/
-- After: https://<branch>--franklin-learning--marcustbx.hlx.live/
+- Before: https://main--aem-exploration--marcustbx.hlx.live/
+- After: https://<branch>--aem-exploration--marcustbx.hlx.live/

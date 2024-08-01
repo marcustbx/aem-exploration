@@ -39,6 +39,8 @@
 
   /* nav height */
   --nav-height: 64px;
+
+  font-size: 10px;
 }
 
 @font-face {

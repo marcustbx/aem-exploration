@@ -4,19 +4,25 @@ main .hero-container > div {
   
 main .hero-container {
   padding: 0;
+  margin-top: 190px;
+  max-width: 1220px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero {
   position: relative;
-  padding: 32px;
-  min-height: 300px;
+  min-height: calc(-250px + 85vh);
+  margin-top: 190px;
 }
 
 .hero h1 {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  color: white;
+  font-size: 7.2rem;
+  padding-bottom: 50px;
+  margin: 0;
 }
 
 .hero picture {

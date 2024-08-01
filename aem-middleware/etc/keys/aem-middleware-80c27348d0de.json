@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "aem-middleware",
+  "private_key_id": "80c27348d0de9506dba5a557ae66a03573782fcc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC/4NoWvWVRz9RS\nomTTYGobuqZ6D6YGr1GEb3rVAtsBdcuJcklTrNowcnjpAq0l6pxq941UAKT43x/6\nbxGBTnOjQliDMAuh7n8CvAKaBoMHNzrlyQEXSnhct8TBb3+MpXi8iBkuGvphGwTd\nzCD5P+srGlKViEEw//v/QfuHalAqDFpHs/xD5TXkOrPXUujgr/JQH79qnDYp/vEI\nokcjDyGMs5JpC7/JcYt51DvzWKLouj7qbisOkGPO4xPpd1b5qE6T4O2eHGmsV9e9\niX+ZeZeLhjYC0awP7qLSMLzj5zLHueDDNfvmxNF5zqM6bYMvm1yyYQJCFbxGzEK+\ny+44kfiZAgMBAAECggEABsUGTMKv3jwPFj9E5jEPoIM5HmaKiZyj3qB93LtC3AFU\nH59/NzGKnSaP94CXRUnKucdnUa0xvnB41PTlBDZIkPXLrUBqGKas2n0+bKeJwrZp\nhvPmUvQ9dnmRVCKWUgsAgH5SWeffwsJ/4HQ0Pmov5nYBfEvk9bdovglahRBa9bDC\nlktzUDFJ+SPJ9/It7ajnVn5uh2ERqLOSKN3S8ee6z+BGXoZR1gaQk2ca/B24WYGN\nBTLOoU70/oBLvW6Eqjuw7/Q5wtsHw6po7/6OzvgceZjfWdWgWRcCRWB7A8tiUjio\nEygGSh6Qg/05JZJa2rrCej+bHVR2mQJ+w89i0IwE9QKBgQDwp0f+/f+qbTMGK7Ma\n+BP1UZ3wvsWHBiOnjtgfx24DRSCsizZQ0EE7YhRLlrFX7xC/E7RLqreGe8OqPX48\nW4sop4+nGwp8S+mBaTEKdIHRe9xBp6yxoa7Xf1Zc6YJr+wvfDUh3P9Sn6/Y8R47T\nCBey1xiNbS22dS5f003gJCIduwKBgQDMHU54psBvq/qlZV5zbSJVJbn14tIppAT0\nQ4SZmofRSUqYO1XkS5WTFIesgxrfzFh2bvWAbSBrs03BH8bT5Z6rEQNiYa2/jSQz\nYv5xvg3eL31itPuYGd2MWW9bUdaPCrS0mxnjdEpIOlO/gDM05Q90PxinIF+gl9s/\npRTv/o4zuwKBgExirIWRlc9ArgttX4JV7+/UIi/CPexn1HVg79TWdmLvVDmwTmNE\nVxBER3DeuhfROB2OYZIK9AnpyueEcUczP25+ESjXenKNneaHvxs0c+hMSlNEp5oS\nWe7o6j6/l7gyjUgVbUT8q8FJMnVbuUfer7cCczagyvu5IikkZvmYPoP1AoGBALeI\nrpO8VRLU0EbCdIBTpGhtyN24+4Kn0jCVOXkow3FDdsiVqfDiqfcbobdUF+kehHjR\n4vx8o4dULdk2qoDEWry1Spa/AA1aay+tlt9NpoifqR4FYKlusJDPplq1prjuRniT\ncl7cpSJ3F/D85I5uXUwIpDE64eG0SlfbJ415FgKbAoGAa5l7BOUc9RWsYSuLXS2N\n6c8NBV2CNxMpoK4BEmgIO/SMvKUe8AqRIYdpn3SBF0sztWrIUIz8NV6lS4x3Mw15\nsxrPy3NyZo/8lebLdifO0TkcKeTOeDGvtHIAKOd8XH+XijpTlMdRrQYupgW18gjj\npzQlH8W4+Lb5fJjLOWeNQkw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "aem-middleware@aem-middleware.iam.gserviceaccount.com",
+  "client_id": "115578257324575959441",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/aem-middleware%40aem-middleware.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
