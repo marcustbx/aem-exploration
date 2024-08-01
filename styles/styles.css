@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-:root {
+ :root {
   /* colors */
   --link-color: #035fe6;
   --link-hover-color: #136ff6;
@@ -20,7 +20,7 @@
   --text-color: black;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback;
+  --body-font-family: inter, -apple-system, "Segoe UI", roboto, inter-fallback, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
@@ -128,10 +128,10 @@ a:any-link {
   text-decoration: none;
 }
 
-a:hover {
+/* a:hover {
   text-decoration: underline;
   color: var(--link-hover-color);
-}
+} */
 
 /* buttons */
 a.button:any-link, button {

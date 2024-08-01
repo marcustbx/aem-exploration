@@ -273,3 +273,15 @@ header nav .nav-sections ul > li > ul > li {
 header nav .nav-tools {
   grid-area: tools;
 }
+
+header nav .nav-brand p {
+  font-size: 45px;
+}
+
+header .nav-sections li {
+  font-weight: 100!important;
+}
+
+header .nav-sections li:not(:last-child) {
+  margin-right: 20px;
+}
