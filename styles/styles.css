@@ -123,17 +123,6 @@ main pre {
   white-space: pre;
 }
 
-/* links */
-a:any-link {
-  color: var(--link-color);
-  text-decoration: none;
-}
-
-/* a:hover {
-  text-decoration: underline;
-  color: var(--link-hover-color);
-} */
-
 /* buttons */
 a.button:any-link, button {
   font-family: var(--body-font-family);
@@ -235,12 +224,7 @@ p {
 }
 
 a {
-  color: #1a73e8;
   text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 table {

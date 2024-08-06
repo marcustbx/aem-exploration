@@ -111,8 +111,8 @@ export default function decorate(block) {
     const mainInfoWithImage = blockRowArray[0];
     const projectMainInfo = mainInfoWithImage.children[1];
     const projectDetailInfo = blockRowArray[1];
-  
     const projectLinkWrapper = createProjectLinkWrapper(projectMainInfo);
+    const projectCardContainer = document.querySelector('.project-card-container');
   
     const mediaDiv = createMediaDiv(mainInfoWithImage, block);
     if (mediaDiv) projectLinkWrapper.append(mediaDiv);
@@ -121,6 +121,6 @@ export default function decorate(block) {
     if (infoDiv) projectLinkWrapper.append(infoDiv);
   
     replaceAllChildElements(block, projectLinkWrapper);
-
+    console.log(projectCardContainer);
 }
   

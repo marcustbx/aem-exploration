@@ -38,3 +38,7 @@ footer .footer-container ul {
 footer .footer-container ul li:not(:last-child) {
   margin-bottom: 5rem
 }
+
+footer {
+  transform: translateY(-1300px);
+}
