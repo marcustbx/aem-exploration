@@ -17,4 +17,15 @@ export default async function decorate(block) {
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
   block.append(footer);
+
+  const footerWrapper = block.querySelector('.footer-content');
+  const footerContainer = footerWrapper.firstElementChild;
+  const columns = footerContainer.querySelectorAll('div');
+
+  columns.forEach(el => { 
+    el.classList.add('column');
+    el.querySelector('p').remove();
+  });
+
+  footerContainer.classList.add('footer-container');
 }

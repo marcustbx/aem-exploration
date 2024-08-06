@@ -1,14 +1,40 @@
 footer {
-  padding: 2rem;
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-s);
+  padding-bottom: 6.5rem;
+  font-family: var(--body-font-family);
 }
 
-footer .footer {
-  max-width: 1200px;
-  margin: auto;
+footer .default-content-wrapper p {
+  font-size: 1.8rem;
+  line-height: 1.75;
+  color: #000;
+  font-weight: 100;
 }
 
-footer .footer p {
-  margin: 0;
+footer .default-content-wrapper a {
+  color: #000;
+}
+
+footer .footer-container {
+  display: flex;
+}
+
+footer .footer-container .column:first-child {
+  margin-right: 150px;
+}
+
+footer .footer-container ul li {
+  list-style: none;
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 1;
+  color: #000;
+  max-width: 150px;
+}
+
+footer .footer-container ul {
+  padding-left: 0;
+}
+
+footer .footer-container ul li:not(:last-child) {
+  margin-bottom: 5rem
 }

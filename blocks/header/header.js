@@ -1,6 +1,8 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
+let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
@@ -147,3 +149,19 @@ export default async function decorate(block) {
   navWrapper.append(nav);
   block.append(navWrapper);
 }
+
+const onScroll = () => {
+
+  const header = document.querySelector('.header-wrapper');
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const headerVisible = !header.classList.contains('transitioned');
+  const threshHold = 500;
+
+  if ( scrollTop > lastScrollTop ) if ( scrollTop > threshHold && headerVisible ) header.classList.add('transitioned');
+  if ( scrollTop < lastScrollTop && scrollTop > threshHold && !headerVisible ) header.classList.remove('transitioned');
+  if ( scrollTop < threshHold && !headerVisible ) header.classList.remove('transitioned');
+
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+}
+
+window.addEventListener('scroll', onScroll); 

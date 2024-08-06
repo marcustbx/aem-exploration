@@ -4,5 +4,3 @@ export default function decorate(block) {
     const buttons = block.querySelectorAll('button'); 
     buttons.forEach(button => { button.classList.add('response-button'); }); 
 }
-
-console.log('test');

@@ -1,0 +1,44 @@
+.ticker-wrapper {
+    max-width: unset!important;
+    margin-top: 6rem!important;
+    margin-bottom: 6rem!important;
+}
+
+.ticker .wrapper {
+    width: 100%;
+    max-width: fit-content;
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    left: 0;
+}
+
+.ticker ul {
+    display: flex;
+    padding: 0;
+    animation: scroll 17s linear infinite;
+}
+
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - 5rem)); }
+}
+
+.ticker ul li {
+    list-style: none;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    color: #000;
+}
+
+.ticker ul li:after {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    margin-left: 36px;
+    margin-right: 36px;
+    background-color: rgba(224, 97, 93, 1);
+}
