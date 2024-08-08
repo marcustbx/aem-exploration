@@ -1,6 +1,5 @@
 import {
   createTag,
-  returnLinkTarget,
   replaceElementType,
   replaceAllChildElements,
   observeElementWithCallback,
@@ -98,29 +97,43 @@ function createInfoDiv(briefInfoDiv, detailInfoDiv) {
     infoDiv.append(titleWrapper, descriptionWrapper);
     return infoDiv;
 }
+
+function appendButton() {
+
+  const projectCardContainer = document.querySelector('.project-card-container');
+
+  const a = document.createElement('a');
+  const linkText = document.createTextNode("All Projects");
+
+  a.classList.add('all-projects');
+  a.appendChild(linkText);
+  a.title = "my title text";
+  a.href = "";
+
+  projectCardContainer.appendChild(a);
+}
   
 export default function decorate(block) {
 
-    const blockRows = block.querySelectorAll(':scope > div');
-    const blockRowArray = [...blockRows];
-    if (blockRows.length < 2) {
-      console.warn('Content Input Alert in Project Card: Need at least 2 rows of data');
-      return;
-    }
+  const blockRows = block.querySelectorAll(':scope > div');
+  const blockRowArray = [...blockRows];
+  if (blockRows.length < 2) {
+    console.warn('Content Input Alert in Project Card: Need at least 2 rows of data');
+    return;
+  }
   
-    const mainInfoWithImage = blockRowArray[0];
-    const projectMainInfo = mainInfoWithImage.children[1];
-    const projectDetailInfo = blockRowArray[1];
-    const projectLinkWrapper = createProjectLinkWrapper(projectMainInfo);
-    const projectCardContainer = document.querySelector('.project-card-container');
+  const mainInfoWithImage = blockRowArray[0];
+  const projectMainInfo = mainInfoWithImage.children[1];
+  const projectDetailInfo = blockRowArray[1];
+  const projectLinkWrapper = createProjectLinkWrapper(projectMainInfo);
   
-    const mediaDiv = createMediaDiv(mainInfoWithImage, block);
-    if (mediaDiv) projectLinkWrapper.append(mediaDiv);
+  const mediaDiv = createMediaDiv(mainInfoWithImage, block);
+  if (mediaDiv) projectLinkWrapper.append(mediaDiv);
+
+  const infoDiv = createInfoDiv(projectMainInfo, projectDetailInfo);
+  if (infoDiv) projectLinkWrapper.append(infoDiv);
   
-    const infoDiv = createInfoDiv(projectMainInfo, projectDetailInfo);
-    if (infoDiv) projectLinkWrapper.append(infoDiv);
-  
-    replaceAllChildElements(block, projectLinkWrapper);
-    console.log(projectCardContainer);
+  replaceAllChildElements(block, projectLinkWrapper);
 }
-  
+
+appendButton();

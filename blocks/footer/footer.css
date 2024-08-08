@@ -1,5 +1,7 @@
 footer {
   padding-bottom: 6.5rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
   font-family: var(--body-font-family);
 }
 
@@ -8,6 +10,8 @@ footer .default-content-wrapper p {
   line-height: 1.75;
   color: #000;
   font-weight: 100;
+  display: flex;
+  flex-direction: column;
 }
 
 footer .default-content-wrapper a {
@@ -28,7 +32,6 @@ footer .footer-container ul li {
   font-size: 2rem;
   line-height: 1;
   color: #000;
-  max-width: 150px;
 }
 
 footer .footer-container ul {
@@ -36,9 +39,23 @@ footer .footer-container ul {
 }
 
 footer .footer-container ul li:not(:last-child) {
-  margin-bottom: 5rem
+  margin-bottom: 3rem
 }
 
-footer {
+/* footer {
   transform: translateY(-1300px);
+} */
+
+@media screen and (min-width: 1200px) {
+  footer .default-content-wrapper p {
+    flex-direction: row;
+  }
+
+  footer .footer-container ul li {
+    max-width: 150px;
+  }
+
+  footer .footer-container ul li:not(:last-child) {
+    margin-bottom: 5rem
+  }
 }
