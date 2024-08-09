@@ -3,6 +3,10 @@
     padding-left: 30px!important;
     padding-right: 30px!important;
     padding-bottom: 110px!important;
+    max-height: 10000px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 250px;
 }
 
 .project-card-container .all-projects {
@@ -12,7 +16,8 @@
     align-items: center;
     -webkit-box-pack: center;
     justify-content: space-between;
-    position: relative;
+    position: absolute;
+    bottom: 0;
     padding: 1.1rem 2.5rem;
     font-size: 1.8rem;
     line-height: 1.75;
@@ -20,8 +25,10 @@
     transition: 0.25s;
     border-width: 2px;
     border: solid 2px #000;
-    max-width: 200px;
+    width: 200px;
     margin: auto;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .project-card-container .all-projects:before {

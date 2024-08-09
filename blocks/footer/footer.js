@@ -44,4 +44,4 @@ function appendButton() {
   footerContainer.appendChild(a);
 }
 
-setTimeout(() => { appendButton(); }, 200);
+setTimeout(() => { appendButton(); }, 500);

@@ -252,3 +252,8 @@ button:hover {
   background-color: #f1f3f4;
   padding: 16px;
 }
+
+body {
+  height: auto;
+  position: relative;
+}
