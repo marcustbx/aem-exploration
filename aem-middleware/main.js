@@ -1,10 +1,25 @@
 import http from "http";
 import { google } from 'googleapis';
-import htmlString from './html.js';
+import instructions from './data/assistant-instructions.js';
+import OpenAI from 'openai';
+import 'dotenv/config';
+import apiKey from './etc/keys/open-ai.js';
 
+// AEM VARIABLES
+let htmlString = null;
+let globalStyles = '';
+let heroBlockJS = '';
+let heroBlockCSS = '';
+let featuresBlockJS = '';
+let featuresBlockCSS = '';
+
+// OPEN AI
+const client = new OpenAI({ apiKey: apiKey });
+
+// GOOGLE
 const googleAuth = new google.auth.GoogleAuth({
-  keyFilename: './etc/keys/aem-middleware-40e1668c153a.json',
-  scopes: [ 'https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive' ]
+    keyFilename: './etc/keys/aem-middleware-40e1668c153a.json',
+    scopes: [ 'https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive' ]
 });
 
 const host = 'localhost';
@@ -12,10 +27,11 @@ const port = 8000;
 const docs = google.docs({ version: 'v1', auth: googleAuth });
 const drive = google.drive({ version: 'v3', auth: googleAuth });   
 const folderId = '1_ar20YK9tr-bdtSLKYZrblAMNrV4U12J';
+const imageFolderId = '1c1Nv_qOQyUKcDcCppownnkeJAJ2C9DRG';
 const fileName = 'test';
 const fileMetadata = { name: fileName, parents: [folderId], mimeType: 'application/vnd.google-apps.document' };
-const html = { mimeType: 'text/html', body: htmlString };
 
+// METHODS
 const findFile = async drive => {
 
     const res = await drive.files.list({
@@ -25,36 +41,105 @@ const findFile = async drive => {
 
     return res.data.files;
 }
-  
+
+const findImages = async drive => {
+
+    const foundFiles = [];
+
+    const res = await drive.files.list({
+        q: `'${imageFolderId}' in parents and mimeType contains 'image/'`,
+        fields: 'files(id, name)',
+    });
+
+    const files = res.data.files;
+
+    if (files.length !== 0) files.forEach(file => { foundFiles.push(`https://drive.google.com/uc?export=view&id=${file.id}`); });
+
+    return foundFiles[0];
+}
+
 const deleteFile = async (drive, fileId) => { await drive.files.delete({ fileId }); }
+
+const sendMessage = async () => {
+
+    const imageUrl = await findImages(drive);
+
+    if ( imageUrl ) {
+
+        const jsonPattern = /```json\n([\s\S]*?)```/;
+        const messages = [
+            { role: "system", content: instructions },
+            { role: "user", content: `Here is an image you can use to generate your markup for: ${imageUrl}.` }
+        ];
+    
+        try {
+    
+            const response = await client.chat.completions.create({
+                model: "gpt-4o",
+                messages: messages,
+            });
+    
+            if ( response.choices[0].message.content ) {
+    
+                const match = response.choices[0].message.content.match(jsonPattern);
+    
+                if ( match ) {
+    
+                    const jsonString = match[1];
+    
+                    try {
+    
+                        const responseContent = JSON.parse(jsonString);
+    
+                        htmlString = responseContent["index.html"];
+                        globalStyles = responseContent["styles.css"];
+                        heroBlockJS = responseContent["hero-block.js"];
+                        heroBlockCSS = responseContent["hero-block.css"];
+                        featuresBlockJS = responseContent["features-block.js"];
+                        featuresBlockCSS = responseContent["features-block.css"];
+    
+                    } catch (error) { console.error("Failed to parse JSON:", error); }
+    
+                } else console.error("No JSON found in the response");
+            }
+        } catch (error) { console.error("Error sending message:", error); }
+
+    } else { console.error("No images found in the folder."); }
+}
 
 const requestListener = async (req, res) => {
 
-    const createResponse = await docs.documents.create();
-    const documentId = createResponse.data.documentId;
-    
-    try {
+    await sendMessage();
 
-        const files = await findFile(drive, fileName);
+    if ( htmlString !== null ) {
 
-        if ( files.length > 0 ) {
+        const html = { mimeType: 'text/html', body: htmlString };
+        const createResponse = await docs.documents.create();
+        const documentId = createResponse.data.documentId;
+        
+        try {
 
-            await deleteFile(drive, files[0].id);
-            console.log(`Deleted existing file with ID: ${files[0].id}`);
-        }
+            const files = await findFile(drive, fileName);
 
-        drive.files.create({
-            requestBody: fileMetadata,
-            media: html,
-            fields: 'id'
-        });
+            if ( files.length > 0 ) {
 
-        console.log(`File uploaded with ID: ${documentId}`);
+                await deleteFile(drive, files[0].id);
+                console.log(`Deleted existing file with ID: ${files[0].id}`);
+            }
 
-    } catch (error) { console.error('Error uploading file:', error); }
+            drive.files.create({
+                requestBody: fileMetadata,
+                media: html,
+                fields: 'id'
+            });
 
-    res.writeHead(200);
-    res.end("AEM Middleware has worked succesfully!");
+            console.log(`File uploaded with ID: ${documentId}`);
+
+        } catch (error) { console.error('Error uploading file:', error); }
+
+        res.writeHead(200);
+        res.end("AEM Middleware has worked succesfully!");
+    }
 };
 
 const server = http.createServer(requestListener);
