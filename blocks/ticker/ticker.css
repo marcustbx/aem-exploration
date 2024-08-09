@@ -1,7 +1,7 @@
 .ticker-wrapper {
     max-width: unset!important;
-    margin-top: 6rem!important;
-    margin-bottom: 6rem!important;
+    margin-top: 1rem!important;
+    margin-bottom: 1rem!important;
 }
 
 .ticker .wrapper {
@@ -41,4 +41,15 @@
     margin-left: 36px;
     margin-right: 36px;
     background-color: rgba(224, 97, 93, 1);
+}
+
+@media (width >= 1200px) {
+    .ticker-wrapper {
+        margin-bottom: 6rem!important;
+        margin-top: 5rem!important;
+    }
+
+    .ticker ul li {
+        font-size: 35px;
+    }
 }

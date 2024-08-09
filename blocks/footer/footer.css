@@ -6,12 +6,19 @@ footer {
 }
 
 footer .default-content-wrapper p {
-  font-size: 1.8rem;
-  line-height: 1.75;
   color: #000;
   font-weight: 100;
   display: flex;
   flex-direction: column;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+@media (width >= 1200px) {
+  footer .default-content-wrapper p {
+    font-size: 1.8rem;
+    line-height: 1.75;
+  }
 }
 
 footer .default-content-wrapper a {
@@ -78,13 +85,31 @@ footer .work-with-us {
   border-width: 2px;
   width: 220px;
   background-color: #222222;
-  margin-top: 25px
+  margin-top: 25px;
+  margin-bottom: 60px;
 }
 
 footer .work-with-us:before {
   content: "";
-  width: 60px;
+  width: 55px;
   display: block;
   height: 1px;
   background-color: #FFF;
+}
+
+.footer .social-icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+.footer .social-icon:not(:last-child) {
+  margin-right: 60px;
+}
+
+footer .footer-logo {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 5.65rem;
+  height: 5.7rem;
 }

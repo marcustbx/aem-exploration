@@ -32,16 +32,39 @@ export default async function decorate(block) {
 
 function appendButton() {
 
+  const buttonContainer = document.createElement('div');
+  const footerWrapper = document.querySelector('.footer-wrapper');
+  const socialIcons = 3;
+  const socialContainer = document.createElement('div');
   const footerContainer = document.querySelector('.footer-content-wrapper');
   const a = document.createElement('a');
   const linkText = document.createTextNode("Work With Us");
+  const svg = document.createElement('img');
 
+  svg.setAttribute('src', 'icons/logo.svg');
+  svg.classList.add('footer-logo');
   a.classList.add('work-with-us');
   a.appendChild(linkText);
   a.title = "my title text";
   a.href = "";
 
-  footerContainer.appendChild(a);
+  for ( let i = 0; i < socialIcons; i++ ) {
+
+    const icon = document.createElement('img');
+
+    if ( i === 0 ) icon.setAttribute('src', 'icons/instagram.png');
+    if ( i === 1 ) icon.setAttribute('src', 'icons/linkedin.png');
+    if ( i === 2 ) icon.setAttribute('src', 'icons/vimeo.png');
+
+    icon.classList.add('social-icon');
+
+    socialContainer.appendChild(icon);
+  }
+
+  buttonContainer.appendChild(a);
+  buttonContainer.appendChild(socialContainer);
+  footerContainer.appendChild(buttonContainer);
+  footerWrapper.appendChild(svg);
 }
 
 setTimeout(() => { appendButton(); }, 500);
