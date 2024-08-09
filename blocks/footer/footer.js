@@ -29,3 +29,19 @@ export default async function decorate(block) {
 
   footerContainer.classList.add('footer-container');
 }
+
+function appendButton() {
+
+  const footerContainer = document.querySelector('.footer-content-wrapper');
+  const a = document.createElement('a');
+  const linkText = document.createTextNode("Work With Us");
+
+  a.classList.add('work-with-us');
+  a.appendChild(linkText);
+  a.title = "my title text";
+  a.href = "";
+
+  footerContainer.appendChild(a);
+}
+
+setTimeout(() => { appendButton(); }, 200);

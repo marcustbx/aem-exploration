@@ -7,7 +7,7 @@ header .nav-wrapper {
   padding: 0;
 }
 
-@media screen and (min-width: 1200px) {
+@media (width >= 1200px) {
   header .nav-wrapper {
     padding: 9.5rem 0 1.5rem 0;
   }
@@ -34,7 +34,7 @@ header nav[aria-expanded="true"] {
   min-height: 100vh;
 }
 
-@media (width >= 900px) {
+@media (width >= 1200px) {
   header nav {
     display: flex;
     justify-content: space-between;
@@ -129,7 +129,7 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-@media (width >= 900px) {
+@media (width >= 1200px) {
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
@@ -144,11 +144,18 @@ header .nav-brand {
   font-weight: 700;
   line-height: 1;
   order: 1;
+  margin-left: 30px;
 }
 
-header .nav-hamburger { order: 2; }
+header .nav-hamburger { 
+  order: 2; 
+  margin-right: 30px;
+}
 
-header .nav-sections { order: 2; }
+header .nav-sections { 
+  order: 2; 
+  margin-right: 30px;
+}
 
 header nav .nav-brand img {
   width: 128px;
@@ -188,7 +195,7 @@ header nav .nav-sections ul > li > ul > li {
   font-weight: 500;
 }
 
-@media (width >= 900px) {
+@media (width >= 1200px) {
   header nav .nav-sections {
     display: block;
     visibility: visible;
@@ -271,6 +278,11 @@ header nav .nav-sections ul > li > ul > li {
   }
 }
 
+@media (width >= 1240px) {
+  header .nav-brand { margin-left: 0; }
+  header .nav-sections { margin-right: 0; }
+}
+
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
@@ -282,7 +294,7 @@ header nav .nav-brand p {
   font-weight: 600;
 }
 
-@media screen and (min-width: 1200px) {
+@media (width >= 1200px) {
   header nav .nav-brand p {
     font-size: 45px;
   }
