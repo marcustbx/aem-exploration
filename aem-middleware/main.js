@@ -4,14 +4,10 @@ import instructions from './data/assistant-instructions.js';
 import OpenAI from 'openai';
 import 'dotenv/config';
 import apiKey from './etc/keys/open-ai.js';
+import fs from 'fs';
 
 // AEM VARIABLES
 let htmlString = null;
-let globalStyles = '';
-let heroBlockJS = '';
-let heroBlockCSS = '';
-let featuresBlockJS = '';
-let featuresBlockCSS = '';
 
 // OPEN AI
 const client = new OpenAI({ apiKey: apiKey });
@@ -73,6 +69,9 @@ const sendMessage = async () => {
         ];
     
         try {
+
+            console.log('Messaging the assistant.');
+            const interval = setInterval(() => { process.stdout.write('.') }, 500);
     
             const response = await client.chat.completions.create({
                 model: "gpt-4o",
@@ -88,18 +87,43 @@ const sendMessage = async () => {
                     const jsonString = match[1];
     
                     try {
+
+                        clearInterval(interval);
+                        process.stdout.write('\n');
+                        console.log('Assistant responce recieved with JSON.');
     
                         const responseContent = JSON.parse(jsonString);
-    
+                        const keys = Object.keys(responseContent);
+                        const stylesFilePath = '../styles/global-styles.css';
+
                         htmlString = responseContent["index.html"];
-                        globalStyles = responseContent["styles.css"];
-                        heroBlockJS = responseContent["hero-block.js"];
-                        heroBlockCSS = responseContent["hero-block.css"];
-                        featuresBlockJS = responseContent["features-block.js"];
-                        featuresBlockCSS = responseContent["features-block.css"];
+
+                        keys.splice(keys.indexOf("index.html"), 1);
+                        keys.splice(keys.indexOf("styles.css"), 1);
+
+                        if (fs.existsSync(stylesFilePath)) fs.unlinkSync(stylesFilePath);
+                        fs.writeFileSync(stylesFilePath, responseContent["styles.css"], 'utf8');
+
+                        try {
+
+                            keys.forEach(key => {
+
+                                let keyName = '';
+
+                                if ( key.includes('.css') ) keyName = key.split('.css').join('');
+                                if ( key.includes('.js') ) keyName = key.split('.js').join('');
+
+                                const dirPath = `../blocks/${keyName}`;
+                                const filePath = `${dirPath}/${key}`;
+
+                                if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true });
+                                fs.writeFileSync(filePath, responseContent[key], 'utf8');
+                            });
+
+                        } catch (err) { console.error(err); }
     
                     } catch (error) { console.error("Failed to parse JSON:", error); }
-    
+
                 } else console.error("No JSON found in the response");
             }
         } catch (error) { console.error("Error sending message:", error); }

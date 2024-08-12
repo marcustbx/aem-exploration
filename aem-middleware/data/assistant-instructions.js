@@ -42,7 +42,7 @@ This is an example of a blank default “block”:
 
 Here is a library of some replacements for consideration when performing the code conversion from HTML to AEM Blocks: 
 
-1. You will replace each div that's one level below the parent div or section level with a “block table” and accompanying custom css and javascript files. Always include 2 extra files for each new block type: Blockname.js and Blockname.css and add these to your output JSON. These are mandatory for ALL defined blocks in the output. specific block-level styles must go in the Blockname.css file or bad things will happen.
+1. You will replace each div that's one level below the parent div or section level with a “block table” and accompanying custom css and javascript files. Always include 2 extra files for each new block type: Blockname.js and Blockname.css and add these to your output JSON. These are mandatory for ALL defined blocks in the output. specific block-level styles must go in the Blockname.css file or bad things will happen. The block name is the text that always comes before classes, for example ***BLOCK NAME (CLASS-A CLASS-B)*** could be this: “illustration-card (card blue-card)”
 
 Once AEM has generated the HTML markup for the block we will want to begin ‘decorating’ this block via js to manipulate the markup structure and add classes to certain elements. This will also allow us to style the block based on the classes that get added during the decoration process.
 
