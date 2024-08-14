@@ -145,7 +145,6 @@ const sendMessage = async () => {
 
             } catch (error) { console.error("Failed to parse JSON:", error); }
         }
-
         clearInterval(interval);
     }
 }
