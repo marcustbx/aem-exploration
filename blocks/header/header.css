@@ -1,15 +1,1 @@
-.header h1 {
-  color: #fff;
-  font-size: 2.5em;
-  margin-bottom: 1em;
-}
-.header button {
-  background-color: #ff9800;
-  color: #fff;
-  border: none;
-  padding: 0.5em 2em;
-  margin: 0 0.5em;
-}
-.header button:hover {
-  background-color: #fb8c00;
-}
+.header .title { font-size: 26pt; font-family: 'Arial'; text-align: center; }

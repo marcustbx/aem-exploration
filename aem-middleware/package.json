@@ -17,6 +17,7 @@
     "googleapis": "^140.0.0",
     "i": "^0.3.7",
     "npm": "^10.8.2",
-    "openai": "^4.55.3"
+    "openai": "^4.55.3",
+    "screenshot-to-code": "^0.1.1"
   }
 }

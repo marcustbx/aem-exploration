@@ -5,9 +5,10 @@ import OpenAI from 'openai';
 import 'dotenv/config';
 import apiKey from './etc/keys/open-ai.js';
 import fs from 'fs';
+import screenshotHtml from './data/screenshot-to-code.js';
 
 // AEM VARIABLES
-let htmlString = null;
+let htmlString = '';
 
 // OPEN AI
 const client = new OpenAI({ apiKey: apiKey });
@@ -56,79 +57,97 @@ const findImages = async drive => {
 
 const deleteFile = async (drive, fileId) => { await drive.files.delete({ fileId }); }
 
+const splitHtmlIntoChunks = (html, chunkSize) => {
+
+    const chunks = [];
+
+    for ( let i = 0; i < html.length; i += chunkSize ) { chunks.push(html.substring(i, i + chunkSize)); }
+
+    return chunks;
+}
+
 const sendMessage = async () => {
 
     const imageUrl = await findImages(drive);
+    const chunkSize = 2;
+    const chunks = splitHtmlIntoChunks(screenshotHtml, chunkSize);
+    const jsonPattern = /```json\n([\s\S]*?)```/;
+
+    let fullResponse = '';
+
+    console.log('Messaging the assistant.');
+    const interval = setInterval(() => { process.stdout.write('.') }, 500);
 
     if ( imageUrl ) {
 
-        const jsonPattern = /```json\n([\s\S]*?)```/;
         const messages = [
             { role: "system", content: instructions },
-            { role: "user", content: `Here is an image you can use to generate your markup for: ${imageUrl}.` }
+            { role: "user", content: `Generate your html markup using the following HTML string as a reference: ${screenshotHtml}` }
         ];
-    
+
         try {
 
-            console.log('Messaging the assistant.');
-            const interval = setInterval(() => { process.stdout.write('.') }, 500);
-    
             const response = await client.chat.completions.create({
                 model: "gpt-4o",
                 messages: messages,
+                temperature: 0.01
             });
     
-            if ( response.choices[0].message.content ) {
-    
-                const match = response.choices[0].message.content.match(jsonPattern);
-    
-                if ( match ) {
-    
-                    const jsonString = match[1];
-    
+            if ( response.choices[0].message.content ) fullResponse += response.choices[0].message.content;
+
+        } catch (error) { console.error('Error generating HTML:', error); }
+
+        const match = fullResponse.match(jsonPattern);
+        
+        if ( match ) {
+
+            const jsonString = match[1];
+
+            try {
+
+                process.stdout.write('\n');
+                console.log('Assistant responce recieved with JSON.');
+
+                const responseContent = JSON.parse(jsonString);
+                const stylesFilePath = '../styles/global-styles.css';
+
+                if ( responseContent ) {
+
+                    const keys = Object.keys(responseContent);
+
+                    if (responseContent["index.html"]) htmlString = responseContent["index.html"];
+
+                    keys.splice(keys.indexOf("index.html"), 1);   
+                    keys.splice(keys.indexOf("styles.css"), 1);
+
+                    if (fs.existsSync(stylesFilePath)) fs.unlinkSync(stylesFilePath);
+                    if (responseContent["styles.css"]) fs.writeFileSync(stylesFilePath, responseContent["styles.css"], 'utf8');
+
                     try {
 
-                        clearInterval(interval);
-                        process.stdout.write('\n');
-                        console.log('Assistant responce recieved with JSON.');
+                        keys.forEach(key => {
     
-                        const responseContent = JSON.parse(jsonString);
-                        const keys = Object.keys(responseContent);
-                        const stylesFilePath = '../styles/global-styles.css';
-
-                        htmlString = responseContent["index.html"];
-
-                        keys.splice(keys.indexOf("index.html"), 1);
-                        keys.splice(keys.indexOf("styles.css"), 1);
-
-                        if (fs.existsSync(stylesFilePath)) fs.unlinkSync(stylesFilePath);
-                        fs.writeFileSync(stylesFilePath, responseContent["styles.css"], 'utf8');
-
-                        try {
-
-                            keys.forEach(key => {
-
-                                let keyName = '';
-
-                                if ( key.includes('.css') ) keyName = key.split('.css').join('');
-                                if ( key.includes('.js') ) keyName = key.split('.js').join('');
-
-                                const dirPath = `../blocks/${keyName}`;
-                                const filePath = `${dirPath}/${key}`;
-
-                                if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true });
-                                fs.writeFileSync(filePath, responseContent[key], 'utf8');
-                            });
-
-                        } catch (err) { console.error(err); }
+                            let keyName = '';
     
-                    } catch (error) { console.error("Failed to parse JSON:", error); }
+                            if ( key.includes('.css') ) keyName = key.split('.css').join('');
+                            if ( key.includes('.js') ) keyName = key.split('.js').join('');
+    
+                            const dirPath = `../blocks/${keyName}`;
+                            const filePath = `${dirPath}/${key}`;
+    
+                            if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true });
+                            if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+                            fs.writeFileSync(filePath, responseContent[key], 'utf8');
+                        });
+    
+                    } catch (err) { console.error(err); }
+                }
 
-                } else console.error("No JSON found in the response");
-            }
-        } catch (error) { console.error("Error sending message:", error); }
+            } catch (error) { console.error("Failed to parse JSON:", error); }
+        }
 
-    } else { console.error("No images found in the folder."); }
+        clearInterval(interval);
+    }
 }
 
 const requestListener = async (req, res) => {
