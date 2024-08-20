@@ -1,0 +1,19 @@
+.cards .overlay-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+.cards .overlay-button {
+  background: white;
+  color: black;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
