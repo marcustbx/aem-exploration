@@ -1,0 +1,14 @@
+.featured-section .featured-image {
+  width: 100%;
+  height: auto;
+}
+
+.featured-section .featured-title {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.featured-section .featured-description {
+  font-size: 1em;
+  color: #666;
+}
