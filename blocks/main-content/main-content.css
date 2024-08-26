@@ -1,0 +1,15 @@
+.main-content .main-heading {
+  font-size: 1.8em;
+  color: #333;
+}
+.main-content .main-paragraph {
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 20px;
+}
+.main-content .main-image {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
