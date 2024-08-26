@@ -1,0 +1,14 @@
+.news-section .news-title {
+  font-size: 1.6em;
+  color: #333;
+}
+
+.news-section .news-item-title {
+  font-size: 1.4em;
+  color: #333;
+}
+
+.news-section .news-description {
+  font-size: 1em;
+  color: #666;
+}
