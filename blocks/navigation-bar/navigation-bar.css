@@ -1,0 +1,12 @@
+.navigation-bar .nav-bar {
+  background-color: #f8f8f8;
+  padding: 10px;
+}
+.navigation-bar .nav-link {
+  color: #007bff;
+  text-decoration: none;
+  margin-right: 15px;
+}
+.navigation-bar .nav-link:hover {
+  text-decoration: underline;
+}
